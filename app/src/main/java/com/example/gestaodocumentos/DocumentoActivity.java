@@ -70,7 +70,7 @@ public class DocumentoActivity extends AppCompatActivity {
         BTNFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DocumentoActivity.this, ConfirmacaoActivity.class);
+                Intent intentConfimacao = new Intent(DocumentoActivity.this, ConfirmacaoActivity.class);
 
                 TextView origem = (TextView) findViewById(R.id.PTOrigem);
                 String txtOrigem = origem.getText().toString();
@@ -84,8 +84,12 @@ public class DocumentoActivity extends AppCompatActivity {
                 if (!txtOrigem.isEmpty() && !txtTipo.contains("Selecione") && !txtMatricula.isEmpty() && !txtNome.isEmpty()) {
                     Bundle bundle = new Bundle();
 
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    bundle.putString("nome", txtNome);
+                    bundle.putString("matricula", txtMatricula);
+
+                    intentConfimacao.putExtras(bundle);
+                    startActivity(intentConfimacao);
+
                     finish();
                 } else if (txtTipo.contains("Selecione")) {
                     Toast.makeText(getApplicationContext(), "Selecione um 'Tipo'!", Toast.LENGTH_SHORT).show();
